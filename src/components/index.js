@@ -1,3 +1,9 @@
 export { default as Header } from "@/components/layout/Header";
 export { default as Footer } from "@/components/layout/Footer";
 export { default as ProductCard } from "@/components/products/ProductCard";
+export { default as ProductList } from "@/components/products/ProductList";
+export { default as Spinner } from "@/components/ui/Spinner";
+export { default as BurgerIcon } from "@/components/ui/BurgerIcon";
+export { default as NavItem } from "@/components/ui/NavItem";
+export { default as Button } from "@/components/ui/Button";
+export { default as Error } from "@/components/ui/Error";

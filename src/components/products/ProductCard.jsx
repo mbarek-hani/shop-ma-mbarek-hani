@@ -1,3 +1,5 @@
+import { Button } from "@/components";
+
 function ProductCard({ product }) {
   return (
     <article className="bg-white rounded-lg flex flex-col justify-between p-4 shadow-sm hover:shadow-md transition-shadow">
@@ -30,12 +32,7 @@ function ProductCard({ product }) {
 
       <div className="mt-4 flex items-center justify-between">
         <span className="text-green-600 font-semibold">{product.price} DH</span>
-        <button
-          className={`bg-blue-600 text-white text-sm px-3 py-1 rounded-md hover:bg-blue-700 disabled:opacity-50 ${product.inStock ? "cursor-pointer" : ""}`}
-          disabled={!product.inStock}
-        >
-          Ajouter
-        </button>
+        <Button disabled={!product.inStock}>Ajouter</Button>
       </div>
     </article>
   );

@@ -1,8 +1,6 @@
 import { useState } from "react";
 import logo from "@/assets/logo.png";
-
-import NavItem from "@/components/ui/NavItem";
-import BurgerIcon from "@/components/ui/BurgerIcon";
+import { NavItem, BurgerIcon } from "@/components";
 
 function Header() {
   const [open, setOpen] = useState(false);
