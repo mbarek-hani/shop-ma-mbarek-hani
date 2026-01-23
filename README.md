@@ -12,20 +12,31 @@ Shop.ma est une application e-commerce permettant la vente en ligne de produits 
 
 ```text
 shop-ma/
-├── public/
-│   └── images/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── pages/
-│   ├── features/
-│   ├── data/
-│   ├── utils/
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.css
+├── api
+│   ├── app
+│   ├── artisan
+│   ├── bootstrap
+│   ├── composer.json
+│   ├── composer.lock
+│   ├── config
+│   ├── database
+│   ├── phpunit.xml
+│   ├── public
+│   │   ├──images/
+│   ├── routes
+│   └── tests
+└── web
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── features/
+│   │   ├── data/
+│   │   ├── utils/
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.css
 ├── README.md
-└── package.json
 ```
 
 # Technologies
@@ -38,8 +49,31 @@ shop-ma/
 # Installation
 ```bash
 git clone git@github.com:mbarek-hani/shop-ma-mbarek-hani.git
+```
+## frontend
+```bash
+cd shop-ma-mbarek-hani/web
 npm install
+```
+## backend
+```bash
+cd shop-ma-mbarek-hani/api
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan db:seed
+```
+# Running
+## frontend
+```bash
+cd shop-ma-mbarek-hani/web
 npm run dev
+```
+## backend
+```bash
+cd shop-ma-mbarek-hani/api
+php artisan serve
 ```
 # Fonctionnalités
 - Affichage catalogue produits (minimum 20 produits)

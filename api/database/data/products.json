@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "name": "Tajine traditionnel en terre cuite",
+        "price": 29.99,
+        "category": "Cuisine",
+        "image": "http://localhost:8000/images/tajine.jpeg",
+        "inStock": true,
+        "description": "Tajine marocain fait main, idéal pour une cuisson lente et savoureuse."
+    },
+    {
+        "id": 2,
+        "name": "Théière marocaine gravée",
+        "price": 24.5,
+        "category": "Cuisine",
+        "image": "http://localhost:8000/images/thiere.jpeg",
+        "inStock": true,
+        "description": "Théière artisanale en métal argenté, parfaite pour le thé à la menthe."
+    },
+    {
+        "id": 3,
+        "name": "Babouche en cuir naturel",
+        "price": 19.99,
+        "category": "Mode",
+        "image": "http://localhost:8000/images/babouche.jpeg",
+        "inStock": false,
+        "description": "Babouche traditionnelle marocaine en cuir souple."
+    },
+    {
+        "id": 4,
+        "name": "Djellaba homme brodée",
+        "price": 59.99,
+        "category": "Mode",
+        "image": "http://localhost:8000/images/djellaba.jpeg",
+        "inStock": true,
+        "description": "Djellaba élégante avec broderies artisanales."
+    },
+    {
+        "id": 5,
+        "name": "Tapis berbère fait main",
+        "price": 199.99,
+        "category": "Décoration",
+        "image": "http://localhost:8000/images/tapis.jpeg",
+        "inStock": true,
+        "description": "Tapis berbère authentique tissé à la main."
+    },
+    {
+        "id": 6,
+        "name": "Pouf marocain en cuir",
+        "price": 89.0,
+        "category": "Décoration",
+        "image": "http://localhost:8000/images/pouf.jpeg",
+        "inStock": false,
+        "description": "Pouf en cuir véritable, idéal pour un salon chaleureux."
+    },
+    {
+        "id": 7,
+        "name": "Lampe orientale en métal",
+        "price": 45.75,
+        "category": "Décoration",
+        "image": "http://localhost:8000/images/lampe.jpeg",
+        "inStock": true,
+        "description": "Lampe artisanale créant une ambiance orientale unique."
+    },
+    {
+        "id": 8,
+        "name": "Miroir marocain sculpté",
+        "price": 69.99,
+        "category": "Décoration",
+        "image": "http://localhost:8000/images/miroir.jpeg",
+        "inStock": true,
+        "description": "Miroir décoratif avec cadre sculpté à la main."
+    },
+    {
+        "id": 9,
+        "name": "Poterie artisanale décorative",
+        "price": 34.99,
+        "category": "Artisanat",
+        "image": "http://localhost:8000/images/poterie.jpeg",
+        "inStock": true,
+        "description": "Objet de poterie traditionnelle peint à la main."
+    },
+    {
+        "id": 10,
+        "name": "Boîte en bois sculpté",
+        "price": 27.5,
+        "category": "Artisanat",
+        "image": "http://localhost:8000/images/boite-boie.jpeg",
+        "inStock": true,
+        "description": "Boîte décorative en bois sculpté par des artisans marocains."
+    }
+]
