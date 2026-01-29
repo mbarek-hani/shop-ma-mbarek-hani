@@ -25,6 +25,8 @@ class ProductSeeder extends Seeder
                 "image" => $product["image"],
                 "in_stock" => $product["inStock"],
                 "description" => $product["description"],
+                "rating_rate" => $product["rating_rate"],
+                "rating_count" => $product["rating_count"]
             ]);
         }
     }

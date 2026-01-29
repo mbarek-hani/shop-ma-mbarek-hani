@@ -1,7 +1,7 @@
 import useFetch from "@/hooks/useFetch";
 import { Spinner, ProductCard, Error, Button } from "@/components";
 
-function ProductList() {
+function Products() {
   const {
     data: products,
     getData: getProducts,
@@ -18,8 +18,8 @@ function ProductList() {
   }
 
   return (
-    <div className="flex flex-col gap-4 items-end">
-      <Button onClick={getProducts}>Refresh</Button>
+    <div className="flex flex-col gap-4 items-end text-slate-900 dark:text-slate-100">
+      <Button onClick={getProducts}>Refraîchir</Button>
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
@@ -29,4 +29,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default Products;

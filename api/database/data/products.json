@@ -6,7 +6,9 @@
         "category": "Cuisine",
         "image": "http://localhost:8000/images/tajine.jpeg",
         "inStock": true,
-        "description": "Tajine marocain fait main, idéal pour une cuisson lente et savoureuse."
+        "description": "Tajine marocain fait main, idéal pour une cuisson lente et savoureuse.",
+        "rating_rate": 4.5,
+        "rating_count": 128
     },
     {
         "id": 2,
@@ -15,7 +17,9 @@
         "category": "Cuisine",
         "image": "http://localhost:8000/images/thiere.jpeg",
         "inStock": true,
-        "description": "Théière artisanale en métal argenté, parfaite pour le thé à la menthe."
+        "description": "Théière artisanale en métal argenté, parfaite pour le thé à la menthe.",
+        "rating_rate": 4.8,
+        "rating_count": 95
     },
     {
         "id": 3,
@@ -24,7 +28,9 @@
         "category": "Mode",
         "image": "http://localhost:8000/images/babouche.jpeg",
         "inStock": false,
-        "description": "Babouche traditionnelle marocaine en cuir souple."
+        "description": "Babouche traditionnelle marocaine en cuir souple.",
+        "rating_rate": 4.2,
+        "rating_count": 67
     },
     {
         "id": 4,
@@ -33,7 +39,9 @@
         "category": "Mode",
         "image": "http://localhost:8000/images/djellaba.jpeg",
         "inStock": true,
-        "description": "Djellaba élégante avec broderies artisanales."
+        "description": "Djellaba élégante avec broderies artisanales.",
+        "rating_rate": 4.7,
+        "rating_count": 156
     },
     {
         "id": 5,
@@ -42,7 +50,9 @@
         "category": "Décoration",
         "image": "http://localhost:8000/images/tapis.jpeg",
         "inStock": true,
-        "description": "Tapis berbère authentique tissé à la main."
+        "description": "Tapis berbère authentique tissé à la main.",
+        "rating_rate": 4.9,
+        "rating_count": 243
     },
     {
         "id": 6,
@@ -51,7 +61,9 @@
         "category": "Décoration",
         "image": "http://localhost:8000/images/pouf.jpeg",
         "inStock": false,
-        "description": "Pouf en cuir véritable, idéal pour un salon chaleureux."
+        "description": "Pouf en cuir véritable, idéal pour un salon chaleureux.",
+        "rating_rate": 4.4,
+        "rating_count": 112
     },
     {
         "id": 7,
@@ -60,7 +72,9 @@
         "category": "Décoration",
         "image": "http://localhost:8000/images/lampe.jpeg",
         "inStock": true,
-        "description": "Lampe artisanale créant une ambiance orientale unique."
+        "description": "Lampe artisanale créant une ambiance orientale unique.",
+        "rating_rate": 4.6,
+        "rating_count": 189
     },
     {
         "id": 8,
@@ -69,7 +83,9 @@
         "category": "Décoration",
         "image": "http://localhost:8000/images/miroir.jpeg",
         "inStock": true,
-        "description": "Miroir décoratif avec cadre sculpté à la main."
+        "description": "Miroir décoratif avec cadre sculpté à la main.",
+        "rating_rate": 4.3,
+        "rating_count": 78
     },
     {
         "id": 9,
@@ -78,7 +94,9 @@
         "category": "Artisanat",
         "image": "http://localhost:8000/images/poterie.jpeg",
         "inStock": true,
-        "description": "Objet de poterie traditionnelle peint à la main."
+        "description": "Objet de poterie traditionnelle peint à la main.",
+        "rating_rate": 4.5,
+        "rating_count": 94
     },
     {
         "id": 10,
@@ -87,6 +105,8 @@
         "category": "Artisanat",
         "image": "http://localhost:8000/images/boite-boie.jpeg",
         "inStock": true,
-        "description": "Boîte décorative en bois sculpté par des artisans marocains."
+        "description": "Boîte décorative en bois sculpté par des artisans marocains.",
+        "rating_rate": 4.7,
+        "rating_count": 135
     }
 ]
