@@ -12,7 +12,7 @@ function ProductCard({ product }) {
       </div>
 
       <div className="mt-3 flex-1">
-        {product.inStock ? (
+        {product.in_stock ? (
           <span className="inline-block text-xs text-white bg-green-600 px-2 py-1 rounded-md">
             Disponible
           </span>
@@ -32,7 +32,7 @@ function ProductCard({ product }) {
 
       <div className="mt-4 flex items-center justify-between">
         <span className="text-green-600 font-semibold">{product.price} DH</span>
-        <Button disabled={!product.inStock}>Ajouter</Button>
+        <Button disabled={!product.in_stock}>Ajouter</Button>
       </div>
     </article>
   );

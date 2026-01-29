@@ -16,6 +16,6 @@ class Product extends Model
     ];
     protected $casts = [
         "in_stock" => "boolean",
-        "price" => "decimal:2",
+        "price" => "float",
     ];
 }
