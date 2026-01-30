@@ -7,6 +7,12 @@ export const selectProductsError = (state) => state.products.error;
 export const selectProductById = (state, id) =>
   state.products.items.find((p) => String(p.id) === String(id));
 
+export const selectProductCategories = createSelector([selectAllProducts], (items) => {
+  const set = new Set();
+  items.forEach((it) => { if (it && it.category) set.add(it.category); });
+  return Array.from(set).sort();
+});
+
 export const selectFilteredProducts = createSelector(
   [selectAllProducts, (state) => state.products.filters],
   (items, filters) => {
@@ -20,7 +26,7 @@ export const selectFilteredProducts = createSelector(
     if (q) {
       results = results.filter((p) => {
         return (
-          String(p.title || "").toLowerCase().includes(q) ||
+          String(p.name || "").toLowerCase().includes(q) ||
           String(p.description || "").toLowerCase().includes(q)
         );
       });
@@ -34,10 +40,10 @@ export const selectFilteredProducts = createSelector(
         results.sort((a, b) => b.price - a.price);
         break;
       case "rating-asc":
-        results.sort((a, b) => (a.rating || 0) - (b.rating || 0));
+        results.sort((a, b) => (a.rating_rate || 0) - (b.rating_rate || 0));
         break;
       case "rating-desc":
-        results.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+        results.sort((a, b) => (b.rating_rate || 0) - (a.rating_rate || 0));
         break;
       default:
         break;

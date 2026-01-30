@@ -1,0 +1,1 @@
+export const truncate = (s = "", max) => (s && s.length > max ? s.slice(0, max).trimEnd() + " …" : s || "");
