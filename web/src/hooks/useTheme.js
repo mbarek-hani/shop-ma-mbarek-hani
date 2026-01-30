@@ -8,7 +8,7 @@ function getInitialTheme() {
 
     const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
     return prefersDark ? THEMES.DARK : THEMES.LIGHT;
-  } catch (err) {
+  } catch (_) {
     return THEMES.LIGHT;
   }
 }
