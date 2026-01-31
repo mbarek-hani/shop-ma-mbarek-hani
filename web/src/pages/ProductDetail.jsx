@@ -28,7 +28,9 @@ function ProductDetail() {
         if (category == "") {
             dispatch(fetchCategories());
         }
-        dispatch(fetchProductById(id));
+        if (!product) {
+            dispatch(fetchProductById(id));
+        }
     }, [id])
 
     if (error) {
