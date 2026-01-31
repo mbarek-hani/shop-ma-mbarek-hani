@@ -6,17 +6,20 @@ import useTheme from "@/hooks/useTheme";
 import { Sun, Moon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { selectCartCount } from "@/features/cart/cartSelectors";
+import { selectWishlistCount } from "@/features/wishlist/wishlistSelectors";
 
 function Header() {
   const [open, setOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const cartCount = useSelector(selectCartCount);
+  const wishlistCount = useSelector(selectWishlistCount);
 
   const navigate = useNavigate();
 
   const navItems = [
     { to: "/", label: "Acceuil" },
     { to: "/products", label: "Produits" },
+    { to: "/wishlist", label: "Favoris" },
     { to: "/cart", label: "Panier" },
     { to: "/contact", label: "Contact" },
   ];
@@ -49,6 +52,12 @@ function Header() {
             <NavItem key={item.label} to={item.to} onClick={() => setOpen(false)}>
               <div className="flex items-center gap-2">
                 <span>{item.label}</span>
+                {item.to === "/wishlist" && wishlistCount > 0 && (
+                  <span className="inline-flex items-center justify-center min-w-[1.4rem] px-2 py-0.5 text-xs font-semibold rounded-full bg-pink-600 text-white">
+                    {wishlistCount}
+                  </span>
+                )}
+
                 {item.to === "/cart" && cartCount > 0 && (
                   <span className="inline-flex items-center justify-center min-w-[1.4rem] px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-600 text-white">
                     {cartCount}

@@ -1,4 +1,5 @@
-import { CART_STORAGE_KEY } from "@/utils/constants";
+import { CART_STORAGE_KEY, WISHLIST_STORAGE_KEY } from "@/utils/constants";
+
 export const truncate = (s = "", max) => (s && s.length > max ? s.slice(0, max).trimEnd() + " …" : s || "");
 
 export const loadCart = () => {
@@ -15,6 +16,24 @@ export const saveCart = state => {
   try {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state));
   } catch(err) {
+    console.log(err);
+  }
+};
+
+export const loadWishlist = () => {
+  try {
+    const raw = localStorage.getItem(WISHLIST_STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (err) {
+    return null;
+  }
+};
+
+export const saveWishlist = (state) => {
+  try {
+    localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(state));
+  } catch (err) {
     console.log(err);
   }
 };

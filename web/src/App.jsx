@@ -4,6 +4,7 @@ import Products from "@/pages/Products";
 import NotFound from "@/pages/NotFound";
 import ProductDetail from "@/pages/ProductDetail";
 import Cart from "@/pages/Cart";
+import Wishlist from "@/pages/Wishlist";
 import Contact from "@/pages/Contact";
 import { Routes, Route } from "react-router-dom";
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

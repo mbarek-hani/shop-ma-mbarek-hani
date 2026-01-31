@@ -1,13 +1,17 @@
 import { Button } from "@/components";
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/features/cart/cartSlice";
+import { toggleWishlist } from "@/features/wishlist/wishlistSlice";
+import { selectIsInWishlist } from "@/features/wishlist/wishlistSelectors";
+import { Heart } from "lucide-react";
 import { TITLE_LIMIT, DESC_LIMIT } from "@/utils/constants";
 import { truncate } from "@/utils/helpers";
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isInWishlist = useSelector((s) => selectIsInWishlist(s, product.id));
 
   const title = truncate(product.name, TITLE_LIMIT);
   const description = truncate(product.description, DESC_LIMIT);
@@ -26,10 +30,19 @@ function ProductCard({ product }) {
           <span className="text-slate-800 dark:text-slate-100">{typeof product.price === 'number' ? product.price.toFixed(2) : product.price} DH</span>
         </div>
 
-        <div className="absolute right-2 top-2 sm:right-3 sm:top-3">
-          <span className={`inline-flex items-center gap-2 text-[10px] sm:text-xs font-semibold px-2 py-1 rounded-md ${product.in_stock ? 'bg-green-600 text-white dark:bg-green-500' : 'bg-orange-600 text-white dark:bg-orange-500'}`}>
-            {product.in_stock ? 'Disponible' : 'Indisponible'}
-          </span>
+        <div className="absolute right-2 top-2 sm:right-3 sm:top-3 flex items-start gap-2">
+          <div>
+            <span className={`inline-flex items-center gap-2 text-[10px] sm:text-xs font-semibold px-2 py-1 rounded-md ${product.in_stock ? 'bg-green-600 text-white dark:bg-green-500' : 'bg-orange-600 text-white dark:bg-orange-500'}`}>
+              {product.in_stock ? 'Disponible' : 'Indisponible'}
+            </span>
+          </div>
+
+          <button
+            title={isInWishlist ? 'Retirer des favoris' : "Ajouter aux favoris"}
+            onClick={(e) => { e.stopPropagation(); dispatch(toggleWishlist({ id: product.id, name: product.name, image: product.image, price: product.price })); }}
+            className={`ml-1 cursor-pointer rounded-full p-1 shadow-sm hover:scale-105 transition-transform ${isInWishlist ? 'bg-red-50 dark:bg-red-900/30' : 'bg-white/70 dark:bg-slate-800'}`}>
+            <Heart className={`${isInWishlist ? 'text-red-600' : 'text-slate-400 dark:text-slate-300'} w-4 h-4`} />
+          </button>
         </div>
       </div>
 
@@ -63,16 +76,15 @@ function ProductCard({ product }) {
               disabled={!product.in_stock}
               variant={product.in_stock ? "success" : "ghost"}
               className="px-3 py-1 text-xs sm:text-sm h-8 sm:h-9"
-              aria-label={`Ajouter ${product.name} au panier`}
               onClick={() => dispatch(addToCart({ id: product.id, price: product.price, quantity: 1, name: product.name, image: product.image }))}
             >
-              Ajouter
+              Ajouter au panier
             </Button>
 
             <Link
               to={`/products/${product.id}`}
               className="text-xs sm:text-sm text-blue-600 dark:text-blue-400 border-b border-blue-600 dark:border-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
-              aria-label={`Voir les détails de ${product.name}`}>
+            >
               Voir détails
             </Link>
           </div>

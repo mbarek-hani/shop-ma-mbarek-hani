@@ -70,8 +70,8 @@ function Cart() {
                       </button>
                     </div>
 
-                    <Button variant="danger" onClick={() => onRemove(it.id)}>
-                      <Trash className="w-4 h-4 inline-block mr-1" /> Supprimer
+                    <Button variant="danger" className="flex items-center gap-1" onClick={() => onRemove(it.id)}>
+                      <Trash className="w-4 h-4" /> Supprimer
                     </Button>
                   </div>
 

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { saveCart, loadCart } from "@/utils/helpers";
+import { CART_STORAGE_KEY } from "@/utils/constants";
 
 function recalc(state) {
   let totalQuantity = 0;
@@ -77,7 +78,7 @@ const cartSlice = createSlice({
       state.items = [];
       state.totalPrice = 0;
       state.totalQuantity = 0;
-      try { localStorage.removeItem(STORAGE_KEY); } catch (err) { console.log(err); }
+      try { localStorage.removeItem(CART_STORAGE_KEY); } catch (err) { console.log(err); }
     },
   },
 });
