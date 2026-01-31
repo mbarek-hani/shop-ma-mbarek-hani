@@ -13,8 +13,8 @@ function AdminLayout() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
-      <div className="max-w-7xl mx-auto py-6">
+    <div className="min-h-screen dark:bg-slate-900 text-slate-900 dark:text-slate-100">
+      <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-semibold">Admin</h1>
           <div className="md:hidden">
@@ -32,7 +32,7 @@ function AdminLayout() {
         <div className="bg-white dark:bg-slate-900 border border-transparent dark:border-slate-800 rounded-lg shadow-sm dark:shadow-none overflow-hidden">
           <div className="md:flex">
             <aside
-              className={`md:w-64 border-r border-transparent dark:border-slate-800 p-4 md:p-6 ${open ? "block" : "hidden"} md:block bg-white dark:bg-slate-900`}
+              className={`md:w-64 border-r border-transparent dark:border-slate-800 p-2 md:p-4 ${open ? "block" : "hidden"} md:block bg-white dark:bg-slate-900`}
             >
               <nav className="space-y-2">
                 {navItems.map((item) => (
@@ -41,7 +41,7 @@ function AdminLayout() {
               </nav>
             </aside>
 
-            <section className="flex-1 p-4 md:p-6">
+            <section className="flex-1 p-2 md:p-4">
               <Outlet />
             </section>
           </div>

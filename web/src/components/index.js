@@ -17,3 +17,4 @@ export { default as WishlistItem } from "@/components/wishlist/WishlistItem";
 export { default as StatCard } from "@/components/admin/ui/StatCard";
 export { default as ProductItem } from "@/components/admin/ui/ProductItem";
 export { default as ProductRow } from "@/components/admin/ui/ProductRow";
+export { default as ProductMiniCart } from "@/components/admin/ui/ProductMiniCart";

@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="pt-6 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto min-h-screen text-slate-900 dark:text-slate-100">
+      <main className="pt-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen text-slate-900 dark:text-slate-100">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />

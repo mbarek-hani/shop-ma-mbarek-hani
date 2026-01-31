@@ -13,7 +13,7 @@ function ProductCard({ product }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isInWishlist = useSelector((s) => selectIsInWishlist(s, product.id));
-  const category = useSelector((s) => (product && product.category_id ? selectCategoryById(s, product.category_id) : null));
+  const category = useSelector((s) => (selectCategoryById(s, product.category_id)));
 
   const title = truncate(product.name, TITLE_LIMIT);
   const description = truncate(product.description, DESC_LIMIT);

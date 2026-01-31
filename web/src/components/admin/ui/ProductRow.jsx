@@ -1,18 +1,12 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { selectCategoryById } from "@/features/categories/categoriesSelectors";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { fetchCategories } from "@/features/categories/categoriesSlice";
+import { Button } from "@/components";
 
 function ProductRow({ product }) {
-    const dispatch = useDispatch();
     const category = useSelector((s) => selectCategoryById(s, product.category_id))
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        if(!category) {
-            dispatch(fetchCategories());
-        }
-    }, []);
     return (
         <tr className="border-t border-gray-50 dark:border-slate-800">
             <td className="px-4 py-3">
@@ -26,9 +20,9 @@ function ProductRow({ product }) {
             </td>
             <td className="px-4 py-3">{product.price.toFixed(2)} DH</td>
             <td className="px-4 py-3">{category?.name}</td>
-            <td className="px-4 py-3">{product.in_stock ? "En stock" : "Rupture"}</td>
+            <td className={`px-4 py-3 ${product.in_stock ? "text-green-600": "text-rose-600"}`}>{product.in_stock ? "En stock" : "Rupture"}</td>
             <td className="px-4 py-3">
-                <Link to={`/admin/products/${product.id}/edit`} className="text-sm text-blue-600">Modifier</Link>
+                <Button variant="success" onClick={() => navigate(`/admin/products/${product.id}/edit`)}>Modifier</Button>
             </td>
         </tr>
     );

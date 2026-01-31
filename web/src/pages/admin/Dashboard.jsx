@@ -64,10 +64,10 @@ export default function Dashboard() {
     }
 
     return (
-        <div>
+        <>
             <h2 className="text-lg font-medium mb-4">Tableau de bord</h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 auto-rows-fr">
                 <StatCard title="Produits au total" value={stats.total} />
                 <StatCard title="En stock" value={stats.inStock} className="text-green-600" />
                 <StatCard title="Ruptures" value={stats.outOfStock} className="text-rose-600" />
@@ -75,7 +75,7 @@ export default function Dashboard() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-transparent dark:border-slate-800 rounded-lg shadow-sm p-6">
+                <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-transparent dark:border-slate-800 rounded-lg shadow-sm p-4 md:p-6">
                     <div className="flex items-start justify-between">
                         <div>
                             <h3 className="text-sm text-slate-500">Chiffre d'affaires (simulé)</h3>
@@ -85,12 +85,16 @@ export default function Dashboard() {
 
                     <div className="mt-6">
                         <h4 className="text-sm font-medium mb-3">Derniers produits ajoutés</h4>
-                        <ul className="space-y-3">
+
+                        <div className="-mx-4 px-4 md:mx-0 md:px-0">
+                          <ul className="flex gap-3 overflow-x-auto md:overflow-visible md:block py-2 md:py-0 md:space-y-3">
                             {stats.latest.length === 0 && <li className="text-sm text-slate-400">Aucun produit</li>}
                             {stats.latest.map((p) => (
-                               <ProductItem key={p.id} product={p} />
+                                <ProductItem key={p.id} product={p} />
                             ))}
-                        </ul>
+                          </ul>
+                        </div>
+
                     </div>
                 </div>
 
@@ -103,6 +107,6 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
