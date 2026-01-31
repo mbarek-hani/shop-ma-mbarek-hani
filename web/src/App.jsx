@@ -1,4 +1,5 @@
-import { Header, Footer } from "@/components";
+import { Header, Footer, AdminLayout } from "@/components";
+
 import Home from "@/pages/Home";
 import Products from "@/pages/Products";
 import NotFound from "@/pages/NotFound";
@@ -6,6 +7,12 @@ import ProductDetail from "@/pages/ProductDetail";
 import Cart from "@/pages/Cart";
 import Wishlist from "@/pages/Wishlist";
 import Contact from "@/pages/Contact";
+
+import AdminDashboard from "@/pages/admin/Dashboard";
+import AdminProducts from "@/pages/admin/ProductsList";
+import AdminProductForm from "@/pages/admin/ProductForm";
+import AdminOrders from "@/pages/admin/Orders";
+
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -20,6 +27,15 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
+          {/* admin routes */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="products/new" element={<AdminProductForm />} />
+            <Route path="products/:id/edit" element={<AdminProductForm />} />
+            <Route path="orders" element={<AdminOrders />} />
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

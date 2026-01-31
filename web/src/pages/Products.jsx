@@ -15,7 +15,9 @@ function Products() {
   const error = useSelector(selectProductsError);
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    if (products.length === 0) {
+      dispatch(fetchProducts());
+    }
   }, []);
 
   if (status === "loading" && products.length === 0) {

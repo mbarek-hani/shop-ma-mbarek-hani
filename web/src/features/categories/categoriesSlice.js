@@ -13,8 +13,7 @@ export const fetchCategories = createAsyncThunk(
     try {
       const res = await fetch(BASE_URL + "/categories");
       if (!res.ok) {
-        const text = await res.text().catch(() => null);
-        return rejectWithValue(text || "Failed to fetch categories");
+        return rejectWithValue("Failed to fetch categories");
       }
       const json = await res.json();
       return json;
