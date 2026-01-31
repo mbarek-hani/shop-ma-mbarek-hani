@@ -1,12 +1,20 @@
 import { setFilter, setSortBy, resetFilters } from "@/features/products/productsSlice";
-import { selectProductCategories } from "@/features/products/productsSelectors";
+import { selectAllCategories } from "@/features/categories/categoriesSelectors";
+import { fetchCategories } from "@/features/categories/categoriesSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { Button } from "@/components";
 
 function ProductFilters() {
     const dispatch = useDispatch();
     const filters = useSelector((s) => s.products.filters);
-    const categories = useSelector(selectProductCategories);
+    const categories = useSelector(selectAllCategories);
+
+    useEffect(() => {
+      if (!categories || categories.length === 0) {
+        dispatch(fetchCategories());
+      }
+    }, []);
 
     return (
       <div className="w-full flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 justify-end bg-transparent">
@@ -31,7 +39,7 @@ function ProductFilters() {
           >
             <option value="">Toutes</option>
             {categories.map((c) => (
-              <option key={c} value={c}>{c}</option>
+              <option key={c.id} value={c.name}>{c.name}</option>
             ))}
           </select>
 

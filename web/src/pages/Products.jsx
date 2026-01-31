@@ -15,10 +15,8 @@ function Products() {
   const error = useSelector(selectProductsError);
 
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchProducts());
-    }
-  }, [dispatch, status]);
+    dispatch(fetchProducts());
+  }, []);
 
   if (status === "loading" && products.length === 0) {
     return (

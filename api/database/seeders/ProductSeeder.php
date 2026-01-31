@@ -18,15 +18,21 @@ class ProductSeeder extends Seeder
         $products = json_decode($json, true);
 
         foreach ($products as $product) {
+            $categoryId = null;
+            if (!empty($product['category'])) {
+                $cat = \App\Models\Category::firstOrCreate(['name' => $product['category']]);
+                $categoryId = $cat->id;
+            }
+
             Product::create([
-                "name" => $product["name"],
-                "price" => $product["price"],
-                "category" => $product["category"],
-                "image" => $product["image"],
-                "in_stock" => $product["inStock"],
-                "description" => $product["description"],
-                "rating_rate" => $product["rating_rate"],
-                "rating_count" => $product["rating_count"]
+                'name' => $product['name'],
+                'price' => $product['price'],
+                'category_id' => $categoryId,
+                'image' => $product['image'],
+                'in_stock' => $product['inStock'],
+                'description' => $product['description'],
+                'rating_rate' => $product['rating_rate'],
+                'rating_count' => $product['rating_count'],
             ]);
         }
     }

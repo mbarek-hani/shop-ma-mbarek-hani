@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/features/cart/cartSlice";
 import { toggleWishlist } from "@/features/wishlist/wishlistSlice";
 import { selectIsInWishlist } from "@/features/wishlist/wishlistSelectors";
+import { selectCategoryById } from "@/features/categories/categoriesSelectors";
 import { Heart } from "lucide-react";
 import { TITLE_LIMIT, DESC_LIMIT } from "@/utils/constants";
 import { truncate } from "@/utils/helpers";
@@ -12,6 +13,7 @@ function ProductCard({ product }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isInWishlist = useSelector((s) => selectIsInWishlist(s, product.id));
+  const category = useSelector((s) => (product && product.category_id ? selectCategoryById(s, product.category_id) : null));
 
   const title = truncate(product.name, TITLE_LIMIT);
   const description = truncate(product.description, DESC_LIMIT);
@@ -68,7 +70,7 @@ function ProductCard({ product }) {
             </div>
 
             <div className="hidden xs:inline text-xs sm:text-sm text-slate-500 dark:text-slate-400">·</div>
-            <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 truncate max-w-32">{product.category || ''}</div>
+            <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 truncate max-w-32">{category?.name}</div>
           </div>
 
           <div className="mt-auto flex items-center justify-between gap-3 pt-2 min-h-12 flex-col sm:flex-row">

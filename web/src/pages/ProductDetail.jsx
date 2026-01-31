@@ -1,23 +1,44 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import useFetch from '@/hooks/useFetch';
 import { Button, Spinner, Error } from '@/components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '@/features/cart/cartSlice';
+import {
+    selectProductById,
+    selectProductsError,
+    selectProductsStatus
+} from '@/features/products/productsSelectors';
+import { fetchProductById } from '../features/products/productsSlice';
+import { useEffect } from 'react';
+import { selectCategoryById } from '@/features/categories/categoriesSelectors';
+import { fetchCategories } from '@/features/categories/categoriesSlice';
 
 function ProductDetail() {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { data: product, getData: getProduct, loading, error } = useFetch(`/products/${id}`, `Failed to fetch product with id ${id}`);
 
-    if (loading) {
+    const product = useSelector(selectProductById(id));
+    const status = useSelector(selectProductsStatus);
+    const error = useSelector(selectProductsError);
+    const categoryFromStore = useSelector((s) => (product?.category_id ? selectCategoryById(s, product.category_id) : null));
+    const category = categoryFromStore?.name || '';
+
+    useEffect(() => {
+        if (category == "") {
+            dispatch(fetchCategories());
+        }
+        dispatch(fetchProductById(id));
+    }, [id])
+
+    if (error) {
+        return <Error retry={() => dispatch(fetchProductById(id))}>{error}</Error>;
+    }
+
+    if (status === "loading" || !product) {
         return <Spinner />;
     }
 
-    if (error) {
-        return <Error retry={getProduct}>{error}</Error>;
-    }
 
     return (
         <div className="min-h-screen py-8 px-4">
@@ -47,7 +68,7 @@ function ProductDetail() {
                                 </h1>
                                 <div className="flex items-center gap-4">
                                     <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 text-sm font-semibold px-3 py-1 rounded-full">
-                                        {product.category}
+                                        {category}
                                     </span>
                                     {product.in_stock ? (
                                         <span className="inline-block text-xs text-white bg-green-600 dark:bg-green-500 px-2 py-1 rounded-md">
