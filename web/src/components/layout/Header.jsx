@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import logo from "@/assets/logo.png";
 import { NavItem, BurgerIcon } from "@/components";
 import useTheme from "@/hooks/useTheme";
 import { Sun, Moon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { selectCartCount } from "@/features/cart/cartSelectors";
 
 function Header() {
   const [open, setOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const cartCount = useSelector(selectCartCount);
 
   const navigate = useNavigate();
 
@@ -44,7 +47,14 @@ function Header() {
         <div className="max-w-6xl mx-auto md:mx-0 flex flex-col md:flex-row md:items-center md:gap-8">
           {navItems.map((item) => (
             <NavItem key={item.label} to={item.to} onClick={() => setOpen(false)}>
-              {item.label}
+              <div className="flex items-center gap-2">
+                <span>{item.label}</span>
+                {item.to === "/cart" && cartCount > 0 && (
+                  <span className="inline-flex items-center justify-center min-w-[1.4rem] px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-600 text-white">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
             </NavItem>
           ))}
           <div className="mt-4 md:mt-0 md:ml-4 flex items-center">

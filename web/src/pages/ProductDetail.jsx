@@ -2,10 +2,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import useFetch from '@/hooks/useFetch';
 import { Button, Spinner, Error } from '@/components';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/features/cart/cartSlice';
 
 function ProductDetail() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { data: product, getData: getProduct, loading, error } = useFetch(`/products/${id}`, `Failed to fetch product with id ${id}`);
 
     if (loading) {
@@ -87,7 +90,12 @@ function ProductDetail() {
                             </div>
 
                             <div className="flex flex-col gap-3 mt-4">
-                                <Button variant="success">Ajouter au panier</Button>
+                                <Button
+                                  variant="success"
+                                  onClick={() => dispatch(addToCart({ id: product.id, price: product.price, quantity: 1, name: product.name, image: product.image }))}
+                                >
+                                  Ajouter au panier
+                                </Button>
                                 <Button
                                     variant="ghost"
                                     onClick={() => navigate(-1)}

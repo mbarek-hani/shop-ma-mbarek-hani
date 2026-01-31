@@ -1,10 +1,13 @@
 import { Button } from "@/components";
 import { useNavigate, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/features/cart/cartSlice";
 import { TITLE_LIMIT, DESC_LIMIT } from "@/utils/constants";
 import { truncate } from "@/utils/helpers";
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const title = truncate(product.name, TITLE_LIMIT);
   const description = truncate(product.description, DESC_LIMIT);
@@ -56,7 +59,13 @@ function ProductCard({ product }) {
           </div>
 
           <div className="mt-auto flex items-center justify-between gap-3 pt-2 min-h-12 flex-col sm:flex-row">
-            <Button disabled={!product.in_stock} variant={product.in_stock ? "success" : "ghost"} className="px-3 py-1 text-xs sm:text-sm h-8 sm:h-9" aria-label={`Ajouter ${product.name} au panier`}>
+            <Button
+              disabled={!product.in_stock}
+              variant={product.in_stock ? "success" : "ghost"}
+              className="px-3 py-1 text-xs sm:text-sm h-8 sm:h-9"
+              aria-label={`Ajouter ${product.name} au panier`}
+              onClick={() => dispatch(addToCart({ id: product.id, price: product.price, quantity: 1, name: product.name, image: product.image }))}
+            >
               Ajouter
             </Button>
 
