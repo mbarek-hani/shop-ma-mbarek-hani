@@ -7,3 +7,5 @@ export { default as BurgerIcon } from "@/components/ui/BurgerIcon";
 export { default as NavItem } from "@/components/ui/NavItem";
 export { default as Button } from "@/components/ui/Button";
 export { default as Error } from "@/components/ui/Error";
+export { default as CartItem } from "@/components/cart/CartItem";
+export { default as WishlistItem } from "@/components/wishlist/WishlistItem";

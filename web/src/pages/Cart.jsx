@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@/components";
 import { ShoppingCart, Plus, Minus, Trash } from "lucide-react";
+import CartItem from "@/components/cart/CartItem";
 import {
   updateQuantity,
   removeFromCart,
@@ -51,38 +52,13 @@ function Cart() {
 
         <ul className="divide-y divide-slate-100 dark:divide-slate-800">
           {items.map((it) => (
-            <li key={it.id} className="flex items-center gap-4 py-4">
-              <img src={it.image} alt={it.name} className="w-20 h-20 object-cover rounded-md bg-slate-50 dark:bg-slate-800" />
-
-              <div className="flex-1 min-w-0">
-                <Link to={`/products/${it.id}`} className="font-medium text-slate-900 dark:text-slate-100 hover:underline">
-                  {it.name}
-                </Link>
-                <div className="mt-2 flex items-center justify-between gap-4 text-sm text-slate-600 dark:text-slate-400">
-                  <div className="flex items-center gap-3">
-                    <div className="inline-flex items-center border rounded-md overflow-hidden bg-slate-50 dark:bg-slate-800">
-                      <button className="p-2" onClick={() => onDec(it.id, it.quantity)}>
-                        <Minus className="w-4 h-4" />
-                      </button>
-                      <div className="px-3 font-medium">{it.quantity}</div>
-                      <button className="p-2" onClick={() => onInc(it.id, it.quantity)}>
-                        <Plus className="w-4 h-4" />
-                      </button>
-                    </div>
-
-                    <Button variant="danger" className="flex items-center gap-1" onClick={() => onRemove(it.id)}>
-                      <Trash className="w-4 h-4" /> Supprimer
-                    </Button>
-                  </div>
-
-                  <div className="text-right">
-                    <div className="text-sm text-slate-500">Prix unitaire</div>
-                    <div className="font-semibold text-slate-900 dark:text-slate-100">{(Number(it.price) || 0).toFixed(2)} DH</div>
-                    <div className="text-xs text-slate-500 mt-1">Sous-total <span className="font-medium">{(Number(it.price) * Number(it.quantity)).toFixed(2)} DH</span></div>
-                  </div>
-                </div>
-              </div>
-            </li>
+            <CartItem
+              key={it.id}
+              item={it}
+              onInc={onInc}
+              onDec={onDec}
+              onRemove={onRemove}
+            />
           ))}
         </ul>
 

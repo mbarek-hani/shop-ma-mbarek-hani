@@ -78,7 +78,7 @@ function ProductCard({ product }) {
               className="px-3 py-1 text-xs sm:text-sm h-8 sm:h-9"
               onClick={() => dispatch(addToCart({ id: product.id, price: product.price, quantity: 1, name: product.name, image: product.image }))}
             >
-              Ajouter au panier
+              Ajouter
             </Button>
 
             <Link
