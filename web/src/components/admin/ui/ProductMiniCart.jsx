@@ -1,8 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectCategoryById } from "@/features/categories/categoriesSelectors";
-import { fetchProducts } from "@/features/products/productsSlice";
-import { BASE_URL } from "@/utils/constants";
+import { deleteProduct } from "@/features/products/productsSlice";
 import { Eye, Edit3, Trash2 } from "lucide-react";
 import { useState } from "react";
 
@@ -15,15 +14,13 @@ function ProductMiniCart({ product }) {
   const handleView = () => navigate(`/products/${product.id}`);
   const handleEdit = () => navigate(`/admin/products/${product.id}/edit`);
   const handleDelete = async () => {
-    if (!window.confirm("Supprimer ce produit ?")) return;
+    if (!window.confirm(`Supprimer « ${product.name} » ?`)) return;
     try {
       setDeleting(true);
-      const res = await fetch(`${BASE_URL}/products/${product.id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error("delete failed");
-      dispatch(fetchProducts());
+      await dispatch(deleteProduct(product.id)).unwrap();
+      navigate('/admin/products', { replace: true, state: { success: 'Produit supprimé' } });
     } catch (err) {
-      console.error(err);
-      window.alert("Impossible de supprimer le produit");
+      window.alert('Impossible de supprimer le produit');
     } finally {
       setDeleting(false);
     }

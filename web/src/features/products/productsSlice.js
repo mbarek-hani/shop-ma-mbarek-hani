@@ -89,6 +89,22 @@ export const updateProduct = createAsyncThunk(
   }
 );
 
+export const deleteProduct = createAsyncThunk(
+  "products/deleteProduct",
+  async (id, { rejectWithValue }) => {
+    if (!id) return rejectWithValue("Missing id");
+    try {
+      const res = await fetch(`${BASE_URL}/products/${id}`, { method: "DELETE" });
+      if (!res.ok) {
+        return rejectWithValue("Couldn't delete product");
+      }
+      return id;
+    } catch (err) {
+      return rejectWithValue("Network error");
+    }
+  }
+);
+
 const productsSlice = createSlice({
   name: "products",
   initialState,
@@ -173,6 +189,21 @@ const productsSlice = createSlice({
         }
       })
       .addCase(updateProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      // deleteProduct
+      .addCase(deleteProduct.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const id = action.payload;
+        state.items = state.items.filter((i) => i.id != id);
+        if (state.product && String(state.product.id) === String(id)) state.product = null;
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });
