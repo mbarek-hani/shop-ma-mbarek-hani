@@ -28,10 +28,28 @@ export default function ProductForm() {
 
   useEffect(() => {
     if (isEdit && !product) {
+      setName("");
+      setPrice("");
+      setDescription("");
+      setCategoryInput("");
+      setImage("");
+      setInStock(false);
+      setErrors({});
       dispatch(fetchProducts());
     }
+
     if (categories.length === 0) {
       dispatch(fetchCategories());
+    }
+
+    if (!isEdit) {
+      setName("");
+      setPrice("");
+      setDescription("");
+      setCategoryInput("");
+      setImage("");
+      setInStock(false);
+      setErrors({});
     }
   }, [isEdit, dispatch, categories.length, product]);
 
@@ -44,6 +62,7 @@ export default function ProductForm() {
       setInStock(Boolean(product?.inStock ?? product?.in_stock));
       const cat = categories.find((c) => c.id === product.category_id);
       setCategoryInput(cat?.name || "");
+      setErrors({});
     }
   }, [product, categories]);
 
