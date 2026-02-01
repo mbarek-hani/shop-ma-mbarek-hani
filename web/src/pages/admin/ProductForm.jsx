@@ -4,7 +4,7 @@ import { selectProductById } from "@/features/products/productsSelectors";
 import { Button } from "@/components";
 import { useEffect, useState } from "react";
 import { selectCategoryById } from "../../features/categories/categoriesSelectors";
-import { fetchProducts, addProduct } from "../../features/products/productsSlice";
+import { fetchProducts, addProduct, updateProduct } from "../../features/products/productsSlice";
 import { fetchCategories } from "../../features/categories/categoriesSlice";
 
 export default function ProductForm() {
@@ -59,11 +59,9 @@ export default function ProductForm() {
     return Object.keys(e).length === 0;
   };
 
-  const submit = async (ev) => {
-    ev.preventDefault();
-    if (!validate()) return;
+  const buildPayload = () => {
     const matched = categories.find((c) => c.name.toLowerCase() === (categoryInput || "").trim().toLowerCase());
-    const payload = {
+    return {
       name: name.trim(),
       price: Number(price),
       description: description || "",
@@ -71,13 +69,25 @@ export default function ProductForm() {
       image: image || "",
       in_stock: Boolean(inStock),
     };
+  };
+
+  const submit = async (ev) => {
+    ev.preventDefault();
+    if (!validate()) return;
+    const payload = buildPayload();
 
     try {
       setSubmitting(true);
-      const res = await dispatch(addProduct(payload)).unwrap();
-      navigate('/admin/products', { state: { success: 'Produit créé avec succès' } });
+
+      if (isEdit) {
+        await dispatch(updateProduct({ id, ...payload })).unwrap();
+        navigate('/admin/products', { state: { success: 'Produit modifié avec succès' } });
+      } else {
+        await dispatch(addProduct(payload)).unwrap();
+        navigate('/admin/products', { state: { success: 'Produit créé avec succès' } });
+      }
     } catch (err) {
-      alert("Couldn't create product");
+      alert(isEdit ? 'Impossible de modifier le produit' : 'Impossible de créer le produit');
     } finally {
       setSubmitting(false);
     }

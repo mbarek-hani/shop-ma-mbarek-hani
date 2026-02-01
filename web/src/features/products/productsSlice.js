@@ -58,7 +58,28 @@ export const addProduct = createAsyncThunk(
         body: JSON.stringify(payload),
       });
       if (!res.ok) {
-        return rejectWithValue("Coundn't add product");
+        return rejectWithValue("Couldn't add product");
+      }
+      const json = await res.json();
+      return json;
+    } catch {
+      return rejectWithValue("Network error");
+    }
+  }
+);
+
+export const updateProduct = createAsyncThunk(
+  "products/updateProduct",
+  async ({ id, ...payload }, { rejectWithValue }) => {
+    if (!id) return rejectWithValue("Missing id");
+    try {
+      const res = await fetch(`${BASE_URL}/products/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        return rejectWithValue("Couldn't update product");
       }
       const json = await res.json();
       return json;
@@ -72,6 +93,11 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
+    updateProductLocal(state, action) {
+      const idx = state.items.findIndex((i) => String(i.id) === String(action.payload.id));
+      if (idx === -1) state.items.unshift(action.payload);
+      else state.items[idx] = action.payload;
+    },
     setFilter(state, action) {
       state.filters = { ...state.filters, ...action.payload };
     },
@@ -125,15 +151,34 @@ const productsSlice = createSlice({
         state.status = "succeeded";
         if (action.payload && action.payload.id != null) {
           state.items.unshift(action.payload);
+          state.product = action.payload;
         }
       })
       .addCase(addProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      // updateProduct
+      .addCase(updateProduct.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        if (action.payload && action.payload.id != null) {
+          const idx = state.items.findIndex((i) => String(i.id) === String(action.payload.id));
+          if (idx === -1) state.items.unshift(action.payload);
+          else state.items[idx] = action.payload;
+          state.product = action.payload;
+        }
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });
   },
 });
 
-export const { setFilter, setSortBy, resetFilters } = productsSlice.actions;
+export const { updateProductLocal, setFilter, setSortBy, resetFilters } = productsSlice.actions;
 
 export default productsSlice.reducer;

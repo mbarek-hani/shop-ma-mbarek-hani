@@ -26,7 +26,7 @@ class ProductController extends Controller
             'category_id' => 'required|integer|exists:categories,id',
             'image' => 'required|url',
             'price' => 'required|numeric|min:0',
-            'in_stock' => 'required|integer|min:0',
+            'in_stock' => 'required|boolean',
         ]);
         $product = Product::create($validatedData);
         return response()->json($product, 201);
@@ -52,7 +52,7 @@ class ProductController extends Controller
             'category_id' => 'required|integer|exists:categories,id',
             'image' => 'required|url',
             'price' => 'required|numeric|min:0',
-            'in_stock' => 'required|integer|min:0',
+            'in_stock' => 'required|boolean',
         ]);
         $product = Product::findOrFail($id);
         $product->update($validatedData);
