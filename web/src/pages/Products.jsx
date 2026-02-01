@@ -15,12 +15,10 @@ function Products() {
   const error = useSelector(selectProductsError);
 
   useEffect(() => {
-    if (products.length === 0) {
-      dispatch(fetchProducts());
-    }
-  }, [dispatch, products]);
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
-  if (status === "loading" && products.length === 0) {
+  if (status === "loading") {
     return (
       <div className="flex flex-col gap-4 w-full text-slate-900 dark:text-slate-100">
         <ProductFilters />

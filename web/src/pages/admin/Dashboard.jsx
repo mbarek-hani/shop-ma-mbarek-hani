@@ -17,13 +17,9 @@ export default function Dashboard() {
     const categoriesError = useSelector(selectCategoriesError);
 
     useEffect(() => {
-        if (categories.length === 0) {
-            dispatch(fetchCategories())
-        }
-        if (products.length === 0) {
-            dispatch(fetchProducts());
-        }
-    }, [dispatch, categories, products]);
+        dispatch(fetchCategories())
+        dispatch(fetchProducts());
+    }, [dispatch]);
 
     const stats = useMemo(() => {
         const total = products.length;
@@ -48,7 +44,7 @@ export default function Dashboard() {
         return { total, inStock: inStockProductsLength, outOfStock: outOfStockProductsLength, orders, revenue, latest: latestFiveProducts };
     }, [products]);
 
-    if(
+    if (
         (productsStatus === "loading" && products.length === 0)
         || (categoriesStatus === "loading" && categories.length === 0)
     ) {
@@ -87,12 +83,12 @@ export default function Dashboard() {
                         <h4 className="text-sm font-medium mb-3">Derniers produits ajoutés</h4>
 
                         <div className="-mx-4 px-4 md:mx-0 md:px-0">
-                          <ul className="flex gap-3 overflow-x-auto md:overflow-visible md:block py-2 md:py-0 md:space-y-3">
-                            {stats.latest.length === 0 && <li className="text-sm text-slate-400">Aucun produit</li>}
-                            {stats.latest.map((p) => (
-                                <ProductItem key={p.id} product={p} />
-                            ))}
-                          </ul>
+                            <ul className="flex gap-3 overflow-x-auto md:overflow-visible md:block py-2 md:py-0 md:space-y-3">
+                                {stats.latest.length === 0 && <li className="text-sm text-slate-400">Aucun produit</li>}
+                                {stats.latest.map((p) => (
+                                    <ProductItem key={p.id} product={p} />
+                                ))}
+                            </ul>
                         </div>
 
                     </div>
