@@ -11,7 +11,6 @@ const initialState = {
   items: [],
   status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
-  // single product cache / detail
   product: null,
   filters: { ...initialFilters },
 };
@@ -45,6 +44,26 @@ export const fetchProductById = createAsyncThunk(
       return json;
     } catch (err) {
       return rejectWithValue(err.message || "Network error");
+    }
+  }
+);
+
+export const addProduct = createAsyncThunk(
+  "products/addProduct",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await fetch(BASE_URL + "/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        return rejectWithValue("Coundn't add product");
+      }
+      const json = await res.json();
+      return json;
+    } catch {
+      return rejectWithValue("Network error");
     }
   }
 );
@@ -96,6 +115,21 @@ const productsSlice = createSlice({
       .addCase(fetchProductById.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error?.message || "Failed to load product";
+      })
+      // addProduct
+      .addCase(addProduct.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(addProduct.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        if (action.payload && action.payload.id != null) {
+          state.items.unshift(action.payload);
+        }
+      })
+      .addCase(addProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
       });
   },
 });

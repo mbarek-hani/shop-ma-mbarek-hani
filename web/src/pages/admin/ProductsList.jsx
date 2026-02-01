@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ProductRow } from "@/components";
 import { useEffect, useState, useMemo } from "react";
 import { fetchProducts } from "@/features/products/productsSlice";
@@ -12,14 +12,23 @@ export default function ProductsList() {
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
   const categories = useSelector(selectAllCategories);
+  const { state } = useLocation();
 
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
+  const [flash, setFlash] = useState(state?.success || "");
 
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (flash) {
+      const t = setTimeout(() => setFlash(""), 3500);
+      return () => clearTimeout(t);
+    }
+  }, [flash]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -32,6 +41,14 @@ export default function ProductsList() {
 
   return (
     <>
+      {flash && (
+        <div className="mb-4 max-w-3xl">
+          <div className="rounded-md bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 px-4 py-2 text-sm text-emerald-700 dark:text-emerald-300">
+            {flash}
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div className="flex items-center gap-4">
           <h2 className="text-lg font-medium">Produits</h2>
@@ -41,7 +58,6 @@ export default function ProductsList() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <div className="flex items-center gap-2 w-full sm:w-72 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md px-3 py-2 shadow-sm">
             <input
-              aria-label="Rechercher par nom"
               className="appearance-none bg-transparent placeholder-slate-400 text-sm w-full text-slate-700 dark:text-slate-100 focus:outline-none"
               placeholder="Rechercher par nom..."
               value={query}
@@ -49,7 +65,6 @@ export default function ProductsList() {
             />
             {query && (
               <button
-                aria-label="Effacer la recherche"
                 title="Effacer"
                 onClick={() => setQuery("")}
                 className="text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
