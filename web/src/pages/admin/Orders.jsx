@@ -23,7 +23,7 @@ export default function Orders() {
                 const id = 1000 + i;
                 const total = ((i + 1) * 23.5).toFixed(2);
                 const items = Math.max(1, 1 + i);
-                const date = new Date(Date.now() - i * 1000 * 60 * 60 * 24).toLocaleDateString();
+                const date = "2026-02-01";
                 const status = i % 3 === 0 ? "Livré" : i % 3 === 1 ? "En cours" : "Annulé";
                 return (
                   <tr key={id} className="border-t border-gray-50 dark:border-slate-800">
@@ -46,7 +46,7 @@ export default function Orders() {
           const id = 1000 + i;
           const total = ((i + 1) * 23.5).toFixed(2);
           const items = Math.max(1, 1 + i);
-          const date = new Date(Date.now() - i * 1000 * 60 * 60 * 24).toLocaleDateString();
+          const date = "2026-02-01";
           const status = i % 3 === 0 ? "Livré" : i % 3 === 1 ? "En cours" : "Annulé";
           return (
             <div key={id} className="bg-white dark:bg-slate-900 border border-transparent dark:border-slate-800 rounded-lg shadow-sm p-4">

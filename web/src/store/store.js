@@ -6,7 +6,8 @@ import categoriesReducer from '@/features/categories/categoriesSlice';
 
 // only logs in development
 const loggerMiddleware = (storeAPI) => (next) => (action) => {
-  if (process.env.NODE_ENV !== 'development') return next(action);
+  const env = process.env.NODE_ENV || "development";
+  if (env !== 'development') return next(action);
   try {
     const prev = storeAPI.getState();
     console.group?.(action.type);
@@ -16,7 +17,7 @@ const loggerMiddleware = (storeAPI) => (next) => (action) => {
     console.log('next state', storeAPI.getState());
     console.groupEnd?.();
     return result;
-  } catch (err) {
+  } catch {
     return next(action);
   }
 };

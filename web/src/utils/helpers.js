@@ -7,7 +7,7 @@ export const loadCart = () => {
     const raw = localStorage.getItem(CART_STORAGE_KEY);
     if (!raw) return null;
     return JSON.parse(raw);
-  } catch (err) {
+  } catch {
     return null;
   }
 };
@@ -25,7 +25,7 @@ export const loadWishlist = () => {
     const raw = localStorage.getItem(WISHLIST_STORAGE_KEY);
     if (!raw) return null;
     return JSON.parse(raw);
-  } catch (err) {
+  } catch {
     return null;
   }
 };

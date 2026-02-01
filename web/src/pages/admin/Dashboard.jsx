@@ -23,7 +23,7 @@ export default function Dashboard() {
         if (products.length === 0) {
             dispatch(fetchProducts());
         }
-    }, []);
+    }, [dispatch, categories, products]);
 
     const stats = useMemo(() => {
         const total = products.length;

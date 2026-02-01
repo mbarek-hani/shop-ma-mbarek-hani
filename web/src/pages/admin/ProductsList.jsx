@@ -16,7 +16,7 @@ export default function ProductsList() {
             dispatch(fetchProducts());
             dispatch(fetchCategories());
         }
-    }, []);
+    }, [dispatch, products]);
 
     return (
         <>

@@ -22,7 +22,7 @@ export default function ProductForm() {
     if (isEdit && !category) {
         dispatch(fetchCategories());
     }
-  }, [isEdit]);
+  }, [isEdit, dispatch, category, product]);
 
   return (
     <div>

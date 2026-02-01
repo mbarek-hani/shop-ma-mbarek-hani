@@ -18,7 +18,7 @@ function Products() {
     if (products.length === 0) {
       dispatch(fetchProducts());
     }
-  }, []);
+  }, [dispatch, products]);
 
   if (status === "loading" && products.length === 0) {
     return (

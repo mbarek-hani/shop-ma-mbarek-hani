@@ -14,7 +14,7 @@ function ProductFilters() {
       if (!categories || categories.length === 0) {
         dispatch(fetchCategories());
       }
-    }, []);
+    }, [dispatch, categories]);
 
     return (
       <div className="w-full flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 justify-end bg-transparent">

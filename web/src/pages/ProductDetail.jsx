@@ -31,7 +31,7 @@ function ProductDetail() {
         if (!product) {
             dispatch(fetchProductById(id));
         }
-    }, [id]);
+    }, [id, dispatch, product, category]);
 
     if (error) {
         return <Error retry={() => dispatch(fetchProductById(id))}>{error}</Error>;
